@@ -80,7 +80,7 @@ export default function CaseStudies() {
           <span className="text-xs font-sans tracking-[0.2em] text-white/60 uppercase hidden md:block drop-shadow-md">Proof of Execution</span>
         </div>
 
-        <div className="flex flex-col w-full border-t border-white/10">
+       <div className="flex flex-col w-full border-t border-white/10 relative overflow-hidden">
           {projects.map((project, index) => {
             // Automatically generate the slug from the title
             const slug = project.title.toLowerCase().replace(/\s+/g, '-');

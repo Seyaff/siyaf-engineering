@@ -6,11 +6,13 @@ import Philosophy from "@/components/Philosophy";
 import CaseStudies from "@/components/CaseStudies";
 import Initiate from "@/components/Intitiate";
 import CustomCursor from "@/components/CutstomCursor";
+import Preloader from "@/components/PreLoader";
 
 export default function Home() {
   return (
     <main className="relative w-full bg-[#1a1a1a] selection:bg-[#d4c3b3] selection:text-black overflow-x-hidden cursor-none">
       
+      <Preloader />
       {/* 0. THE FLUID CUSTOM CURSOR */}
       <CustomCursor />
 

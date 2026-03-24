@@ -52,7 +52,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* THE PILL NAVBAR */}
+      {/* 1. THE PILL NAVBAR */}
       <motion.nav
         initial={{ y: -100, opacity: 0, scale: 0.5 }}
         animate={{ y: isHidden ? -100 : 20, opacity: isHidden ? 0 : 1, scale: isHidden ? 0.8 : 1 }}
@@ -77,15 +77,18 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      
+      {/* 2. THE BACKGROUND OVERLAY */}
       <div className={`fixed z-[45] transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] bg-[#1a1a1a]/95 backdrop-blur-2xl ${isOpen ? "top-0 left-0 w-screen h-[100dvh] rounded-none opacity-100 pointer-events-auto" : "top-8 left-0 right-0 mx-auto w-[90%] max-w-sm h-14 rounded-xl opacity-0 pointer-events-none"}`}>
         <motion.div className={`absolute inset-0 bg-[url('/hero-siyaf.jpg')] bg-cover bg-center bg-no-repeat transition-opacity duration-[1200ms] ${isOpen ? "opacity-20 delay-300" : "opacity-0"}`} />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-    
+      {/* 3. THE LINKS CONTAINER (Fixed Pointer Events) */}
       <div className={`fixed inset-0 z-[60] flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-6 transition-all duration-700 ${isOpen ? "opacity-100 pointer-events-none" : "opacity-0 pointer-events-none"}`}>
-        <div className="flex flex-col w-full gap-2 mt-16 pointer-events-auto overflow-hidden">
+        
+        {/* THE FIX: pointer-events-none when closed, pointer-events-auto when open */}
+        <div className={`flex flex-col w-full gap-2 mt-16 overflow-hidden ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
+          
           {navItems.map((item, i) => (
             <motion.div
               key={item.name}
