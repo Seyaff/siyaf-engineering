@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import Link from "next/link"; // <-- Added Next.js Link
 
 const projects = [
   {
@@ -43,7 +44,7 @@ export default function CaseStudies() {
   return (
     <section className="relative w-full py-32 md:py-48 px-6 md:px-12 cursor-default z-20 overflow-hidden">
       
-    
+      {/* BACKGROUND WITH HEAVY SCRIM */}
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -52,11 +53,10 @@ export default function CaseStudies() {
       >
         <div className="absolute inset-0 bg-[url(/IMG_4580.jpg)] bg-cover bg-center bg-no-repeat bg-fixed" />
         <div className="absolute inset-0 bg-[#3a2e24] mix-blend-overlay opacity-30" />
-      
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/70 to-[#1a1a1a]" />
       </motion.div>
 
-    
+      {/* THE CURSOR REVEAL IMAGE */}
       <motion.div
         className="fixed top-0 left-0 w-[20rem] md:w-[28rem] aspect-[4/5] pointer-events-none z-[100] overflow-hidden rounded-sm shadow-2xl"
         style={{ x: smoothX, y: smoothY, translateX: "-50%", translateY: "-50%" }}
@@ -81,30 +81,36 @@ export default function CaseStudies() {
         </div>
 
         <div className="flex flex-col w-full border-t border-white/10">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="group relative w-full flex flex-col md:flex-row md:items-center justify-between py-10 md:py-16 border-b border-white/10 hover:border-white/30 transition-colors duration-500"
-            >
-              <div className="flex flex-col">
-                <span className="text-4xl md:text-7xl lg:text-[6rem] font-serif font-bold tracking-tighter text-white/50 group-hover:text-[#f4efe6] transition-colors duration-500 uppercase relative z-10 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                  {project.title}
-                </span>
-              </div>
+          {projects.map((project, index) => {
+            // Automatically generate the slug from the title
+            const slug = project.title.toLowerCase().replace(/\s+/g, '-');
 
-              <div className="flex flex-row md:flex-col items-end justify-between md:justify-end w-full md:w-auto mt-4 md:mt-0 relative z-10">
-                
-                <span className="text-xs font-sans tracking-[0.2em] text-[#d4c3b3] group-hover:text-white transition-colors duration-500 uppercase mb-2 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-sm border border-white/5 shadow-lg">
-                  {project.service}
-                </span>
-                <span className="text-xs font-sans text-white/40 group-hover:text-[#f4efe6] transition-colors duration-500 drop-shadow-md">
-                  {project.year}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+            return (
+              // Wrapped the row in a Next.js Link
+              <Link href={`/case-studies/${slug}`} key={index} className="w-full block cursor-none">
+                <motion.div
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="group relative w-full flex flex-col md:flex-row md:items-center justify-between py-10 md:py-16 border-b border-white/10 hover:border-white/30 transition-colors duration-500"
+                >
+                  <div className="flex flex-col">
+                    <span className="text-4xl md:text-7xl lg:text-[6rem] font-serif font-bold tracking-tighter text-white/50 group-hover:text-[#f4efe6] transition-colors duration-500 uppercase relative z-10 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
+                      {project.title}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-row md:flex-col items-end justify-between md:justify-end w-full md:w-auto mt-4 md:mt-0 relative z-10">
+                    <span className="text-xs font-sans tracking-[0.2em] text-[#d4c3b3] group-hover:text-white transition-colors duration-500 uppercase mb-2 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-sm border border-white/5 shadow-lg">
+                      {project.service}
+                    </span>
+                    <span className="text-xs font-sans text-white/40 group-hover:text-[#f4efe6] transition-colors duration-500 drop-shadow-md">
+                      {project.year}
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

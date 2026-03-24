@@ -78,7 +78,8 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${garamound.variable} ${fraunces.variable} ${poppins.variable} antialiased`}
     >
-      <body className="bg-black text-white font-sans antialiased">
+      {/* UPDATED: Applied the global cinematic colors to the body */}
+      <body className="bg-[#1a1a1a] text-[#f4efe6] font-sans antialiased overflow-x-hidden selection:bg-[#d4c3b3] selection:text-black">
         <IntroProvider>
           <Navbar />
           {children}

@@ -1,48 +1,68 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Philosophy from "@/components/Philosophy";
 import CaseStudies from "@/components/CaseStudies";
-import CustomCursor from "@/components/CutstomCursor";
 import Initiate from "@/components/Intitiate";
-
+import CustomCursor from "@/components/CutstomCursor";
 
 export default function Home() {
   return (
     <main className="relative w-full bg-[#1a1a1a] selection:bg-[#d4c3b3] selection:text-black overflow-x-hidden cursor-none">
-     
+      
+      {/* 0. THE FLUID CUSTOM CURSOR */}
       <CustomCursor />
 
-   
+      {/* 1. THE CINEMATIC HERO SECTION */}
       <section className="relative w-full h-screen overflow-hidden">
         <motion.div 
           initial={{ scale: 1.05 }} animate={{ scale: 1 }} transition={{ duration: 2, ease: "easeOut" }}
           className="absolute inset-0 z-0"
         >
-          <div className="absolute inset-0 bg-[url(/hero-siyaf.jpg)] bg-cover bg-center bg-no-repeat" />
-          <div className="absolute inset-0 z-1 opacity-20 pointer-events-none translate-y-[-10px] bg-[url(/IMG_4580.jpg)] bg-cover bg-center bg-no-repeat bg-fixed" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)]" />
-          <div className="absolute inset-0 bg-[#3a2e24] mix-blend-overlay opacity-30" />
+          {/* OPTIMIZED BASE LAYER */}
+          <Image 
+            src="/hero-siyaf.jpg" 
+            alt="Siyaf Engineering Workspace" 
+            fill 
+            priority 
+            quality={90}
+            className="object-cover object-center"
+          />
+          
+          {/* OPTIMIZED PARALLAX LAYER */}
+          <div className="absolute inset-0 z-1 opacity-20 pointer-events-none translate-y-[-10px]">
+            <Image 
+              src="/IMG_4580.jpg" 
+              alt="Texture overlay" 
+              fill 
+              quality={75}
+              className="object-cover object-center"
+            />
+          </div>
+
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] z-10" />
+          <div className="absolute inset-0 bg-[#3a2e24] mix-blend-overlay opacity-30 z-10" />
         </motion.div>
 
         <nav className="absolute top-8 right-12 z-50 hidden md:flex gap-8 text-[10px] font-sans tracking-[0.2em] text-white/90 uppercase font-bold">
-          <span className="hover:text-white transition-colors">Intro</span>
-          <span className="hover:text-white transition-colors">Capabilities</span>
-          <span className="hover:text-white transition-colors">Proof</span>
-          <span className="hover:text-white transition-colors">Initiate</span>
+          <span className="hover:text-white transition-colors cursor-none">Intro</span>
+          <span className="hover:text-white transition-colors cursor-none">Capabilities</span>
+          <span className="hover:text-white transition-colors cursor-none">Proof</span>
+          <span className="hover:text-white transition-colors cursor-none">Initiate</span>
         </nav>
 
         <div className="absolute top-[15%] left-12 z-10 pointer-events-none">
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="text-xs font-sans tracking-[0.2em] text-white/80 uppercase font-bold mb-2 ml-2">
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="text-xs font-sans tracking-[0.2em] text-white/80 uppercase font-bold mb-2 ml-2 drop-shadow-md">
             Made for scaling. Built for scale.
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4 }} className="text-[8rem] md:text-[14rem] lg:text-[18rem] font-serif font-bold text-[#f4efe6] tracking-tighter leading-[0.75]">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4 }} className="text-[8rem] md:text-[14rem] lg:text-[18rem] font-serif font-bold text-[#f4efe6] tracking-tighter leading-[0.75] drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
             SIYAF.
           </motion.h1>
         </div>
 
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.8 }} className="absolute top-[45%] right-12 md:right-24 z-20 max-w-sm pointer-events-none hidden md:block">
-          <p className="text-xl md:text-2xl font-serif text-white/95 leading-snug shadow-black/50 drop-shadow-md">
+          <p className="text-xl md:text-2xl font-serif text-white/95 leading-snug shadow-black/50 drop-shadow-lg">
             Architected to perform, scale, and convert in all the right ways. Siyaf makes complex digital ecosystems feel effortless.
           </p>
         </motion.div>
@@ -74,11 +94,10 @@ export default function Home() {
         </motion.div>
       </section>
 
-    
+      {/* 2. THE REST OF THE ECOSYSTEM */}
       <div className="relative z-50">
         <Philosophy />
         <CaseStudies />
-       
         <Initiate />
       </div>
 

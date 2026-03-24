@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Environment } from "@react-three/drei";
 import { motion } from "framer-motion";
+import Image from "next/image"; // <-- Added Next.js Image
 import * as THREE from "three";
 
 function DreamShape() {
@@ -46,7 +47,18 @@ function DreamShape() {
 export default function Hero() {
   return (
     <section className="relative w-full h-screen">
-      <div className="absolute inset-0 bg-[url(/hero-siyaf.jpg)] bg-cover bg-center bg-no-repeat z-0" />
+      
+      {/* OPTIMIZED BACKGROUND IMAGE LAYER */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/hero-siyaf.jpg" 
+          alt="Cinematic Workspace" 
+          fill 
+          priority 
+          quality={90}
+          className="object-cover object-center"
+        />
+      </div>
 
       <div className="absolute inset-0 z-10">
         <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
