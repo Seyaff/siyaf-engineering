@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // This is the only place you ever have to change your URL
-const API_URL = "https://siyaf-api.onrender.com/api/contact"; 
+const API_URL = "https://siyaf-api.onrender.com/api/v1/contact"; 
 
 export const contactService = {
   /**
