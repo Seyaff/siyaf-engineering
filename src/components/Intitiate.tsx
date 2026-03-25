@@ -20,21 +20,18 @@ export default function Initiate() {
     setErrorMsg("");
 
     try {
-     
       await contactService.transmitLead(formData);
 
-   
+    
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-      
-      
+    
       setTimeout(() => setStatus("idle"), 5000);
     } catch (err: any) {
       console.error("Transmission Error:", err.message);
       setErrorMsg(err.message || "Link Failed. Retry.");
       setStatus("error");
       
-     
       setTimeout(() => setStatus("idle"), 5000);
     }
   };
@@ -42,7 +39,7 @@ export default function Initiate() {
   return (
     <section className="relative w-full py-32 px-6 md:px-12 bg-[#1a1a1a] border-t border-white/10 z-[9999] isolate pointer-events-auto">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-        {/* Left Side: The Narrative */}
+        
         <div className="flex flex-col justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +61,7 @@ export default function Initiate() {
           </motion.div>
         </div>
 
-        
+     
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -74,10 +71,9 @@ export default function Initiate() {
             onSubmit={handleSubmit}
             className="relative p-8 border border-white/10 bg-white/5 backdrop-blur-md rounded-sm shadow-2xl flex flex-col gap-6 group hover:border-white/20 transition-colors"
           >
-       
+         
             <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
 
-            {/* Input Fields */}
             <div className="relative z-10 flex flex-col gap-2">
               <label className="text-[10px] font-sans tracking-[0.2em] text-white/40 uppercase">
                 Identifier
@@ -129,7 +125,7 @@ export default function Initiate() {
               />
             </div>
 
-      
+           
             <button
               type="submit"
               disabled={status === "loading" || status === "success"}
@@ -141,6 +137,7 @@ export default function Initiate() {
               {status === "error" && "Link Failed. Retry."}
             </button>
 
+         
             {status === "error" && (
               <motion.p
                 initial={{ opacity: 0 }}
@@ -151,7 +148,7 @@ export default function Initiate() {
               </motion.p>
             )}
 
-           
+        
             {status === "success" && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -164,3 +161,6 @@ export default function Initiate() {
           </form>
         </motion.div>
       </div>
+    </section>
+  );
+}
